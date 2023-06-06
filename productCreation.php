@@ -19,6 +19,7 @@ if($conn->connect_error){
     echo "Created Successfully ...";
     $stmt->close();
     $conn->close();
-
+    // Redirect Page Location
+    header("Location: index.php");
 }
 ?>

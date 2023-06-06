@@ -1,5 +1,6 @@
 .background {
   height: 100vh;
+  width: 100%;
 }
 
 form > div {
@@ -12,4 +13,8 @@ form > div {
 
 .product-section {
   padding-top: 5rem;
+}
+
+.container {
+  overflow: scroll;
 }

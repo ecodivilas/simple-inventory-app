@@ -1,10 +1,16 @@
+<?php
+  include 'connection.php';
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+
+<html>
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Simple Inventory System</title>
+    <title>Product List</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="styles.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -14,75 +20,50 @@
     />
   </head>
   <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 fixed-top">
-      <div class="container">
-        <a href="#" class="navbar-brand">Simple Inventory System</a>
-
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navmenu"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navmenu">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a href="/" class="nav-link">Put Product</a>
-            </li>
-            <li class="nav-item">
-              <a href="/products.php" class="nav-link">Product List</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
+  <?php
+    include "navBar.php";
+    ?>
     <!-- Create Product -->
     <section class="product-section background bg-dark text-light px-2">
-      <div class="container-fluid">
-        <form class="form-control" action="createProduct.php" method="post">
-          <h2>Create Product</h2>
-          <div>
-            <label>Product Name: </label>
-            <input type="text" name="product" class="form-control" />
-          </div>
-          <div>
-            <label>Unit: </label>
-            <input type="text" name="unit" class="form-control" />
-          </div>
-          <div>
-            <label>Price: </label>
-            <!-- <input type="text" name="product" /> -->
-            <div class="input-group">
-              <span class="input-group-text">₱</span>
-              <input type="text" class="form-control" name="price" />
-              <span class="input-group-text">.00</span>
-            </div>
-          </div>
-          <div>
-            <label>Date of Expiry: </label>
-            <input type="date" name="expiry_date" class="form-control" />
-          </div>
-          <div>
-            <label>Available in Inventory: </label>
-            <input type="number" name="quantity" class="form-control" />
-          </div>
-          <div>
-            <label>Upload Image: </label>
-            <input type="file" name="image" class="form-control" />
-          </div>
-
-          <div class="submit">
-            <input
-              type="submit"
-              class="form-control bg-success text-white fw-bold"
-            />
-          </div>
-        </form>
+      <div class="container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Picture</th>
+            <th scope="col">Product</th>
+            <th scope="col">Unit</th>
+            <th scope="col">Price</th>
+            <th scope="col">Expiry Date</th>
+            <th scope="col">Available Inventory</th>
+            <th scope="col">Available Inventory Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+            $sql = "SELECT * FROM product";
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result) > 0) {
+              while($row = mysqli_fetch_assoc($result)){
+                echo "<tr>";
+                $attr = array("image_url", "product",
+                              "unit", "price",
+                              "expiry_date",
+                              "quantity");
+                $attrlength = count($attr);
+                for ($x = 0; $x < $attrlength; $x++) {
+                  echo "<td scope=\"row\">";
+                  echo $row[$attr[$x]];
+                  echo "</td>";
+                }
+                # available inventory cost
+                echo "<td scope=\"row\">";
+                  echo $row["price"] * $row["quantity"];
+                  echo "</td>";
+              } }
+            
+            ?>
+        </tbody>
+      </table>
       </div>
     </section>
     <script
