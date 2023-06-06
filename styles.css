@@ -1,0 +1,15 @@
+.background {
+  height: 100vh;
+}
+
+form > div {
+  padding: 0.2em 0;
+}
+
+.submit {
+  margin-top: 1em;
+}
+
+.product-section {
+  padding-top: 5rem;
+}
