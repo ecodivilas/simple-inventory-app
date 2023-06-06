@@ -1,3 +1,7 @@
+<?php
+  include 'connection.php';
+?>
+
 <!DOCTYPE html>
 
 <html>
@@ -27,13 +31,26 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td scope="row">Pic</td>
-          <td scope="row">Milk</td>
-          <td scope="row">1 kg</td>
-          <td scope="row">200 pesos</td>
-          <td scope="row">2</td>
-        </tr>
+        <?php
+          $sql = "SELECT * FROM product";
+          $result = mysqli_query($conn, $sql);
+          if (mysqli_num_rows($result) > 0) {
+            while($row = mysqli_fetch_assoc($result)){
+              echo "<tr>";
+              $attr = array("product",
+                            "unit", "price",
+                            "expiry_date",
+                            "quantity",
+                            "image_url");
+              $attrlength = count($attr);
+              for ($x = 0; $x < $attrlength; $x++) {
+                echo "<td scope=\"row\">";
+                echo $row[$attr[$x]];
+                echo "</td>";
+              }
+            } }
+          
+          ?>
       </tbody>
     </table>
     <script

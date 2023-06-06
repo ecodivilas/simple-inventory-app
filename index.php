@@ -34,7 +34,7 @@
               <a href="/" class="nav-link">Put Product</a>
             </li>
             <li class="nav-item">
-              <a href="/products.html" class="nav-link">Product List</a>
+              <a href="/products.php" class="nav-link">Product List</a>
             </li>
           </ul>
         </div>
@@ -44,7 +44,7 @@
     <!-- Create Product -->
     <section class="product-section background bg-dark text-light px-2">
       <div class="container-fluid">
-        <form class="form-control" action="connect.php" method="post">
+        <form class="form-control" action="createProduct.php" method="post">
           <h2>Create Product</h2>
           <div>
             <label>Product Name: </label>
