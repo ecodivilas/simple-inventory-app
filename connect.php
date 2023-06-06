@@ -16,7 +16,7 @@ if($conn->connect_error){
         // i = integer, d = double, s = string, b = BLOB
     $stmt->bind_param("ssdsis", $product, $unit , $price, $expiry_date, $quantity, $image);
     $stmt->execute();
-    echo "Created Successfully ..."
+    echo "Created Successfully ...";
     $stmt->close();
     $conn->close();
 
