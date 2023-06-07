@@ -32,7 +32,7 @@ if(isset($_POST["action"]))
      <td class="align-middle">'.$row["product"].'</td>
      <td class="align-middle">'.$row["unit"].'</td>
      <td class="align-middle">'.$row["price"].'</td>
-     <td class="align-middle">'.$row["expiry_date"].'</td>
+     <td class="align-middle">'.date_format(date_create($row["expiry_date"]), 'F d, Y').'</td>
      <td class="align-middle">'.$row["quantity"].'</td>
      <td class="align-middle">'.$row["quantity"]*$row['price'].'</td>
      <td class="align-middle"><button type="button" name="update" class="btn btn-warning bt-xs update" id="'.$row["product_id"].'">Change</button></td>
