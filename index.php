@@ -25,7 +25,7 @@
     <section class="product-section background bg-dark text-light">
       <div class="container">
         <h2 class="py-2">Simple Inventory App</h2>
-        <form class="form-control" action="productCreation.php" method="post">
+        <form class="form-control" action="productCreation.php" method="post"  enctype="multipart/form-data">
           <h2>Create Product</h2>
           <div>
             <label>Product Name: </label>
@@ -54,12 +54,12 @@
           </div>
           <div>
             <label>Upload Image: </label>
-            <input type="file" name="image" class="form-control" />
+            <input type="file" name="file" class="form-control" />
           </div>
 
           <div class="submit">
             <input
-              type="submit"
+              type="submit" name="upload"
               class="form-control bg-success text-white fw-bold"
             />
           </div>
@@ -74,13 +74,13 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">Picture</th>
+            <th scope="col"></th>
             <th scope="col">Product</th>
             <th scope="col">Unit</th>
-            <th scope="col">Price</th>
+            <th scope="col">Price</th> 
             <th scope="col">Expiry Date</th>
-            <th scope="col">Available Inventory</th>
-            <th scope="col">Available Inventory Cost</th>
+            <th scope="col">Available</th>
+            <th scope="col">Available Cost</th>
           </tr>
         </thead>
         <tbody>
@@ -89,22 +89,30 @@
             $result = mysqli_query($conn, $sql);
             if (mysqli_num_rows($result) > 0) {
               while($row = mysqli_fetch_assoc($result)){
+                # Image
                 echo "<tr>";
-                $attr = array("image_url", "product",
+                // echo "<div class=\"table-data d-flex align-items-center p-2\">";
+                echo "<td class=\"table-data align-middle\" >";
+                echo "<img src=\"upload/$row[image_url]\" class=\"img-thumbnail\" style=\"max-width: 6.25rem;\" alt=\"$row[image_url]\" />";
+                echo "</td>";
+
+                $attr = array("product",
                               "unit", "price",
                               "expiry_date",
                               "quantity");
                 $attrlength = count($attr);
                 for ($x = 0; $x < $attrlength; $x++) {
-                  echo "<td scope=\"row\">";
+                  echo "<td scope=\"row\" class=\"align-middle\">";
                   echo $row[$attr[$x]];
                   echo "</td>";
                 }
                 # available inventory cost
-                echo "<td scope=\"row\">";
+                echo "<td scope=\"row\" class=\"align-middle\">";
                   echo $row["price"] * $row["quantity"];
                   echo "</td>";
               } }
+              echo "</tr>";
+              // echo "</div>";
             
             ?>
         </tbody>
