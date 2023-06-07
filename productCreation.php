@@ -20,6 +20,6 @@ if($conn->connect_error){
     $stmt->close();
     $conn->close();
     // Redirect Page Location
-    header("Location: index.php");
+    header("Location: /");
 }
 ?>

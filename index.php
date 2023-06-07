@@ -18,14 +18,59 @@
       integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
       crossorigin="anonymous"
     />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   </head>
   <body>
-  <?php
-    include "navBar.php";
-    ?>
     <!-- Create Product -->
-    <section class="product-section background bg-dark text-light px-2">
+    <section class="product-section background bg-dark text-light">
       <div class="container">
+        <h2 class="py-2">Simple Inventory App</h2>
+        <form class="form-control" action="productCreation.php" method="post">
+          <h2>Create Product</h2>
+          <div>
+            <label>Product Name: </label>
+            <input type="text" name="product" class="form-control" />
+          </div>
+          <div>
+            <label>Unit: </label>
+            <input type="text" name="unit" class="form-control" />
+          </div>
+          <div>
+            <label>Price: </label>
+            <!-- <input type="text" name="product" /> -->
+            <div class="input-group">
+              <span class="input-group-text">₱</span>
+              <input type="text" class="form-control" name="price" />
+              <span class="input-group-text">.00</span>
+            </div>
+          </div>
+          <div>
+            <label>Date of Expiry: </label>
+            <input type="date" name="expiry_date" class="form-control" />
+          </div>
+          <div>
+            <label>Available in Inventory: </label>
+            <input type="number" name="quantity" class="form-control" />
+          </div>
+          <div>
+            <label>Upload Image: </label>
+            <input type="file" name="image" class="form-control" />
+          </div>
+
+          <div class="submit">
+            <input
+              type="submit"
+              class="form-control bg-success text-white fw-bold"
+            />
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Product List -->
+    <section class="product-list-section background bg-dark text-light">
+      <div class="container">
+        <h2>Product List</h2>
       <table class="table">
         <thead>
           <tr>
